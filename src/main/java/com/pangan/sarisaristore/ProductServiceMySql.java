@@ -13,4 +13,13 @@ public class ProductServiceMySql implements ProductService {
     public List<Product> getAllProducts() {
         return _productRepository.findAll();
     }
+
+    public Product addProduct(Product product) {
+        return  _productRepository.save(product);
+    }
+
+    public  Product getProductById(int id) {
+        return _productRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Product not found"));
+    }
 }
