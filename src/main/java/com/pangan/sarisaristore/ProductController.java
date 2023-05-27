@@ -25,4 +25,9 @@ public class ProductController {
     public Product getProductById(@RequestParam("id") int id) {
         return _productService.getProductById(id);
     }
+
+    @PostMapping("/product/update")
+    public  Product updateProduct(@RequestBody Product product) {
+        return _productService.updateProduct(product);
+    }
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceMySql implements ProductService {
@@ -21,5 +22,13 @@ public class ProductServiceMySql implements ProductService {
     public  Product getProductById(int id) {
         return _productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Product not found"));
+    }
+
+    public Product updateProduct(Product updatedProduct) {
+        Product product = _productRepository.findById(updatedProduct.getId())
+                .orElseThrow(() -> new NotFoundException("Product is not found"));
+        product.setName(updatedProduct.getName());
+        product.setPrice(updatedProduct.getPrice());
+        return _productRepository.save(product);
     }
 }
