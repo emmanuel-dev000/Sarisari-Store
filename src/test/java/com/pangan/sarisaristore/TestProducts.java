@@ -10,7 +10,7 @@ class TestProducts {
 	@Test
 	public void whenGetIsCalled_shouldReturnEquals() {
 		var productController = new ProductController();
-		var result = productController.getProducts();
+		var result = productController.getAllProducts();
 		var expected = "Products";
 		assertEquals(expected, result);
 	}
