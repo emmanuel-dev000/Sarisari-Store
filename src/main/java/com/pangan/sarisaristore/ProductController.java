@@ -26,6 +26,7 @@ public class ProductController {
         return _productService.getProductById(id);
     }
 
+    // TODO: Make this into PutMapping instead
     @PostMapping("/product/update")
     public  Product updateProduct(@RequestBody Product product) {
         return _productService.updateProduct(product);
