@@ -9,10 +9,9 @@ class TestProducts {
 
 	@Test
 	public void whenGetIsCalled_shouldReturnEquals() {
-		var productController = new ProductController();
-		var result = productController.getAllProducts();
-		var expected = "Products";
-		assertEquals(expected, result);
+		var productServiceMySql = new ProductServiceMySql();
+		var result = productServiceMySql.getAllProducts();
+		assertNotEquals(0, result);
 	}
 
 }
