@@ -21,8 +21,8 @@ public class ProductController {
         return _productService.addProduct(product);
     }
 
-    @GetMapping("/{id}")
-    public Product getProductById(@RequestParam int id) {
+    @GetMapping("/product")
+    public Product getProductById(@RequestParam("id") int id) {
         return _productService.getProductById(id);
     }
 }
