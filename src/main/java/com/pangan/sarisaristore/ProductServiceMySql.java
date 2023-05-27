@@ -8,6 +8,8 @@ import java.util.Optional;
 
 @Service
 public class ProductServiceMySql implements ProductService {
+
+    private final NullProduct NULL_PRODUCT = new NullProduct();
     @Autowired
     private ProductRepository _productRepository;
 
@@ -30,5 +32,10 @@ public class ProductServiceMySql implements ProductService {
         product.setName(updatedProduct.getName());
         product.setPrice(updatedProduct.getPrice());
         return _productRepository.save(product);
+    }
+
+    public Product deleteProductById(int id) {
+        _productRepository.deleteById(id);
+        return NULL_PRODUCT;
     }
 }

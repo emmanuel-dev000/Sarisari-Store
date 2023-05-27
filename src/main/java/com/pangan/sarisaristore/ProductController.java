@@ -21,7 +21,7 @@ public class ProductController {
         return _productService.addProduct(product);
     }
 
-    @GetMapping("/product")
+    @GetMapping("/")
     public Product getProductById(@RequestParam("id") int id) {
         return _productService.getProductById(id);
     }
@@ -30,5 +30,10 @@ public class ProductController {
     @PostMapping("/product/update")
     public  Product updateProduct(@RequestBody Product product) {
         return _productService.updateProduct(product);
+    }
+
+    @DeleteMapping
+    public Product deleteProductById(@RequestParam("id") int id) {
+        return _productService.deleteProductById(id);
     }
 }
