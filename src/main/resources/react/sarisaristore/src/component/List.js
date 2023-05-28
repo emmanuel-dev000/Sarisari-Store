@@ -1,43 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const INITIAL_LIST = [
-  'Learn React',
-  'Learn Firebase',
-  'Learn GraphQL',
-];
+const List = () => {
+  const [list, setList] = useState([]);
 
-const ListWithAddItem = () => {
-  const [value, setValue] = React.useState('');
-  const [list, setList] = React.useState(INITIAL_LIST);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/products", {
+          headers: {
+            "Content-Type": "application/json"
+          },
+          method: "GET"
+        });
+        const data = await response.json();
+        setList(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    if (value) {
-      setList(list.concat(value));
-    }
-
-    setValue('');
-
-    event.preventDefault();
-  };
+    fetchData();
+  }, []); // Empty dependency array to run effect only once on component mount
 
   return (
     <div>
+      <h1>List Items</h1>
       <ul>
         {list.map(item => (
-          <li key={item}>{item}</li>
+          <li key={item.id}>{item.name}</li>
         ))}
       </ul>
-
-      <form onSubmit={handleSubmit}>
-        <input type="text" value={value} onChange={handleChange} />
-        <button type="submit">Add Item</button>
-      </form>
     </div>
   );
 };
 
-export default ListWithAddItem;
+export default List;
